@@ -1,9 +1,6 @@
-export type DiffOperation = 'equal' | 'insert' | 'delete';
+import type { DiffOperation, DiffResult } from '../types/text-compare';
 
-export interface DiffResult {
-  operation: DiffOperation;
-  text: string;
-}
+export type { DiffOperation, DiffResult };
 
 function splitLines(text: string): string[] {
   return text.split('\n');

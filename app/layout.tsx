@@ -14,10 +14,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en' className='stack-sans-text-regular'>
-      <body className='p-20'>
-        <h1 className='mb-2'>Swiss Army Knife</h1>
+      <body className='py-6 px-20'>
+        <h1 className='mb-2 text-2xl'>Swiss Army Knife</h1>
         <NavMenu />
-        <div className='border rounded-sm mt-10 p-2'>{children}</div>
+        <div className='mt-10 p-2'>{children}</div>
       </body>
     </html>
   );

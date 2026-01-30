@@ -16,9 +16,9 @@ export const TextComparePage = () => {
 
   return (
     <div className='w-full'>
-      <div className='flex py-4 items-center justify-between'>
+      <div className='flex py-4 justify-between'>
         <div></div>
-        <div className='space-x-2'>
+        <div className='space-x-2 w-full'>
           <button
             onClick={compare}
             className='cursor-pointer p-2 rounded-md bg-gray-200 hover:bg-gray-300 transition-all duration-100 border border-gray-300'
@@ -42,8 +42,8 @@ export const TextComparePage = () => {
             onChange={(e) => setFirstText(e.target.value)}
             className='w-full bg-white p-2 border border-gray-300 rounded-sm h-[60vh]'
           ></textarea>
-          <div className='absolute bottom-2 left-2 text-gray-600 text-sm'>
-            {firstText.length}
+          <div className='absolute bottom-2 left-2 text-gray-600 text-xs bg-gray-100 px-2 py-1 rounded'>
+            {firstText.length} characters
           </div>
         </div>
         <div className='relative flex-1 shrink-0'>
@@ -52,17 +52,15 @@ export const TextComparePage = () => {
             onChange={(e) => setSecondText(e.target.value)}
             className='w-full bg-white p-2 border border-gray-300 rounded-sm h-[60vh]'
           ></textarea>
-          <div className='absolute bottom-2 left-2 text-gray-600 text-sm'>
-            {secondText.length}
+          <div className='absolute bottom-2 left-2 text-gray-600 text-xs bg-gray-100 px-2 py-1 rounded'>
+            {secondText.length} characters
           </div>
         </div>
       </div>
 
       {diff.length > 0 && (
         <div className='mt-4'>
-          <h3 className='text-lg font-semibold mb-2'>
-            Diff Result:
-          </h3>
+          <h3 className='text-lg font-semibold mb-2'>Diff Result:</h3>
           <pre className='bg-white border border-gray-300 p-4 rounded-md overflow-auto max-h-96'>
             {diff.map((item, idx) => (
               <div

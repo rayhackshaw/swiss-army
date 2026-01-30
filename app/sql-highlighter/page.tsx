@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useMemo } from "react";
 import classNames from "classnames";
 import {
   validateSQL,
@@ -11,19 +11,12 @@ import type { SqlValidationResult } from "../types/sql-validator";
 
 export const SQLSyntaxValidator = () => {
   const [sqlText, setSqlText] = useState("");
-  const [validation, setValidation] = useState<SqlValidationResult>({
-    isValid: true,
-    errors: [],
-  });
 
-  useEffect(() => {
+  const validation = useMemo<SqlValidationResult>(() => {
     if (!sqlText.trim()) {
-      setValidation({ isValid: true, errors: [] });
-      return;
+      return { isValid: true, errors: [] };
     }
-
-    const result = validateSQL(sqlText);
-    setValidation(result);
+    return validateSQL(sqlText);
   }, [sqlText]);
 
   const getHighlightedSQL = () => {
@@ -35,7 +28,6 @@ export const SQLSyntaxValidator = () => {
   return (
     <div className='w-full'>
       <div className='flex py-4 items-center justify-between'>
-        <h2 className='text-xl font-bold'>SQL Syntax Validator</h2>
         {sqlText.trim() && (
           <div
             className={classNames(

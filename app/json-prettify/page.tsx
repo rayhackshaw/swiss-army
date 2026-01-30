@@ -67,7 +67,6 @@ export const JSONPrettify = () => {
   return (
     <div className='w-full'>
       <div className='flex py-4 items-center justify-between'>
-        <h2 className='text-xl font-bold'>JSON Prettify</h2>
         <div className='flex items-center space-x-2'>
           <label className='text-sm'>Indent:</label>
           <select

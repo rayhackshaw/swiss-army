@@ -220,7 +220,6 @@ export const TypingSpeedTest = () => {
   return (
     <div className='w-full max-w-4xl mx-auto'>
       <div className='flex py-4 items-center justify-between'>
-        <h2 className='text-xl font-bold'>Typing Speed Test</h2>
         <button
           onClick={generateNewWords}
           className='cursor-pointer px-4 py-2 rounded-md bg-gray-200 hover:bg-gray-300 transition-all duration-100 border border-gray-300'

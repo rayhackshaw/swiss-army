@@ -19,7 +19,7 @@ export const ReactionSpeedTest = () => {
   });
 
   const startTimeRef = useRef<number>(0);
-  const timeoutRef = useRef<NodeJS.Timeout>();
+  const timeoutRef = useRef<NodeJS.Timeout>(null);
 
   const calculateStats = (newResults: ReactionResult[]) => {
     if (newResults.length === 0) return;
@@ -120,7 +120,6 @@ export const ReactionSpeedTest = () => {
   return (
     <div className='w-full max-w-4xl mx-auto'>
       <div className='flex py-4 items-center justify-between'>
-        <h2 className='text-xl font-bold'>Reaction Speed Test</h2>
         {results.length > 0 && (
           <button
             onClick={reset}

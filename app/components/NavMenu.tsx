@@ -37,7 +37,7 @@ export const NavMenu = () => {
         return (
           <Link
             href={item.href}
-            prefetch={true}
+            prefetch={false}
             key={item.href}
             className={classNames(
               isActive ? "font-bold underline" : "",

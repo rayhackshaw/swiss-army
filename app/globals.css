@@ -1,9 +1,19 @@
 @import url("https://fonts.googleapis.com/css2?family=Stack+Sans+Text:wght@200..700&display=swap");
 @import "tailwindcss";
 
+@theme {
+  --color-walnut: #582707;
+  --color-rust: #972D07;
+  --color-violet: #372549;
+  --color-silk: #EACDC2;
+  --color-silk-light: #F5EBE6;
+  --color-saffron: #E3B505;
+  --color-saffron-light: #F5D94E;
+}
+
 body {
-  background-color: #fafafa;
-  color: #1a1a1a;
+  background-color: var(--color-silk-light);
+  color: #000000;
   font-family: "Stack Sans Text", sans-serif;
 }
 

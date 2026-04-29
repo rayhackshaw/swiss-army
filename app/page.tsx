@@ -13,11 +13,6 @@ export default function Home() {
         in one place for ease of use.
       </p>
       <br></br>
-      <p>
-        I don&apos;t think this is mobile responsive sorry, it will be if I can
-        ever be bothered.
-      </p>
-      <br></br>
       <div className='flex gap-2 items-center text-sm'>
         <Link
           className='hover:font-semibold transition-all duration-200'

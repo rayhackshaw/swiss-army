@@ -14,8 +14,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en' className='stack-sans-text-regular'>
-      <body className='py-6 px-20'>
-        <h1 className='mb-2 text-2xl'>
+      <body className='py-6 px-4 md:px-20'>
+        <h1 className='mb-2 text-2xl text-black'>
           <span className='font-semibold'>Sw</span>iss{" "}
           <span className='font-semibold'>A</span>rmy K
           <span className='font-semibold'>n</span>ife

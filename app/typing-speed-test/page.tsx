@@ -184,14 +184,14 @@ export const TypingSpeedTest = () => {
 
   const getWordClass = (index: number) => {
     if (index < currentWordIndex) {
-      return "text-gray-400";
+      return "text-black/40";
     }
 
     if (index === currentWordIndex) {
-      return "text-gray-900";
+      return "text-black";
     }
 
-    return "text-gray-500";
+    return "text-black/50";
   };
 
   const getCharClass = (wordIndex: number, charIndex: number) => {
@@ -222,14 +222,14 @@ export const TypingSpeedTest = () => {
       <div className='flex py-4 items-center justify-between'>
         <button
           onClick={generateNewWords}
-          className='cursor-pointer px-4 py-2 rounded-md bg-gray-200 hover:bg-gray-300 transition-all duration-100 border border-gray-300'
+          className='cursor-pointer px-4 py-2 rounded-md bg-silk hover:bg-saffron hover:text-black transition-all duration-100 border border-walnut/20'
         >
           Randomise
         </button>
       </div>
 
-      <div className='flex justify-between items-center w-full mb-4'>
-        <div className='flex gap-2'>
+      <div className='flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 w-full mb-4'>
+        <div className='flex flex-wrap gap-2'>
           {WORD_COUNT_OPTIONS.map((count) => (
             <button
               key={count}
@@ -237,8 +237,8 @@ export const TypingSpeedTest = () => {
               className={classNames(
                 "px-4 py-2 rounded-md transition-all duration-100 border cursor-pointer",
                 wordCount === count
-                  ? "bg-gray-300 font-bold border-gray-400"
-                  : "bg-gray-100 border-gray-300 hover:bg-gray-200"
+                  ? "bg-saffron font-bold border-saffron text-black"
+                  : "bg-silk border-walnut/20 hover:bg-saffron/30"
               )}
             >
               {count}
@@ -248,15 +248,15 @@ export const TypingSpeedTest = () => {
 
         <div className='flex gap-6'>
           <div className='text-center'>
-            <div className='text-gray-600 text-sm'>WPM</div>
+            <div className='text-black/60 text-sm'>WPM</div>
             <div className='font-bold'>{stats.wpm}</div>
           </div>
           <div className='text-center'>
-            <div className='text-gray-600 text-sm'>ACC</div>
+            <div className='text-black/60 text-sm'>ACC</div>
             <div className='font-bold'>{stats.accuracy}%</div>
           </div>
           <div className='text-center'>
-            <div className='text-gray-600 text-sm'>Time</div>
+            <div className='text-black/60 text-sm'>Time</div>
             <div className='font-bold'>{stats.timeElapsed}s</div>
           </div>
         </div>
@@ -264,7 +264,7 @@ export const TypingSpeedTest = () => {
 
       <div
         className={classNames(
-          "bg-white p-6 rounded-lg mb-4 overflow-auto border border-gray-300",
+          "bg-white p-6 rounded-lg mb-4 overflow-auto border border-walnut/20",
           getContainerHeight()
         )}
         suppressHydrationWarning
@@ -296,7 +296,7 @@ export const TypingSpeedTest = () => {
           onChange={(e) => handleInputChange(e.target.value)}
           disabled={testState.isComplete}
           className={classNames(
-            "w-full bg-white p-4 border border-gray-300 rounded-lg text-xl",
+            "w-full bg-white p-4 border border-walnut/20 rounded-lg text-xl",
             testState.isComplete && "opacity-50 cursor-not-allowed"
           )}
           placeholder='Start typing to begin...'

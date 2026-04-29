@@ -94,6 +94,17 @@ export const ReactionSpeedTest = () => {
   };
 
   useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.code === "Space") {
+        e.preventDefault();
+        handleClick();
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  });
+
+  useEffect(() => {
     return () => {
       if (timeoutRef.current) {
         clearTimeout(timeoutRef.current);
@@ -102,19 +113,19 @@ export const ReactionSpeedTest = () => {
   }, []);
 
   const getBackgroundColor = () => {
-    if (gameState === "idle") return "bg-blue-200 border-blue-400";
-    if (gameState === "waiting") return "bg-red-200 border-red-400";
-    if (gameState === "ready") return "bg-green-200 border-green-400";
-    if (gameState === "tooEarly") return "bg-orange-200 border-orange-400";
-    return "bg-blue-200 border-blue-400";
+    if (gameState === "idle") return "bg-violet border-violet text-white";
+    if (gameState === "waiting") return "bg-rust border-rust text-white";
+    if (gameState === "ready") return "bg-saffron border-saffron text-black";
+    if (gameState === "tooEarly") return "bg-walnut border-walnut text-white";
+    return "bg-violet border-violet text-white";
   };
 
   const getMessage = () => {
-    if (gameState === "idle") return "Click to Start";
+    if (gameState === "idle") return "Click or Press Space to Start";
     if (gameState === "waiting") return "Wait for Green...";
     if (gameState === "ready") return "CLICK NOW!";
     if (gameState === "tooEarly") return "Too Early! Click to Try Again";
-    return `${stats.currentTime}ms - Click to Continue`;
+    return `${stats.currentTime}ms - Click or Space to Continue`;
   };
 
   return (
@@ -123,7 +134,7 @@ export const ReactionSpeedTest = () => {
         {results.length > 0 && (
           <button
             onClick={reset}
-            className='cursor-pointer px-4 py-2 rounded-md bg-gray-200 hover:bg-gray-300 transition-all duration-100 border border-gray-300'
+            className='cursor-pointer px-4 py-2 rounded-md bg-silk hover:bg-saffron hover:text-black transition-all duration-100 border border-walnut/20'
           >
             Reset
           </button>
@@ -131,20 +142,20 @@ export const ReactionSpeedTest = () => {
       </div>
 
       {stats.attempts > 0 && (
-        <div className='bg-gray-100 p-6 rounded-lg mb-4 border border-gray-300'>
+        <div className='bg-white p-6 rounded-lg mb-4 border border-walnut/20'>
           <div className='grid grid-cols-3 gap-4 text-center'>
             <div>
-              <div className='text-gray-600 text-sm'>Best Time</div>
-              <div className='text-green-700 text-2xl font-bold'>
+              <div className='text-black/60 text-sm'>Best Time</div>
+              <div className='text-saffron text-2xl font-bold'>
                 {stats.bestTime}ms
               </div>
             </div>
             <div>
-              <div className='text-gray-600 text-sm'>Average</div>
+              <div className='text-black/60 text-sm'>Average</div>
               <div className='text-2xl font-bold'>{stats.averageTime}ms</div>
             </div>
             <div>
-              <div className='text-gray-600 text-sm'>Attempts</div>
+              <div className='text-black/60 text-sm'>Attempts</div>
               <div className='text-2xl font-bold'>{stats.attempts}</div>
             </div>
           </div>
@@ -154,9 +165,9 @@ export const ReactionSpeedTest = () => {
       <button
         onClick={handleClick}
         className={classNames(
-          "w-full h-96 rounded-lg transition-all duration-200",
+          "w-full h-96 transition-all duration-200",
           "flex items-center justify-center",
-          "text-4xl font-bold border-4",
+          "text-4xl font-bold border",
           "cursor-pointer hover:opacity-90",
           getBackgroundColor()
         )}
@@ -165,19 +176,19 @@ export const ReactionSpeedTest = () => {
       </button>
 
       {results.length > 0 && (
-        <div className='mt-6 bg-gray-100 p-6 rounded-lg border border-gray-300'>
+        <div className='mt-6 bg-white p-6 rounded-lg border border-walnut/20'>
           <h3 className='text-lg font-bold mb-4'>History</h3>
           <div className='space-y-2 max-h-64 overflow-y-auto'>
             {results.map((result, index) => (
               <div
                 key={index}
-                className='flex justify-between items-center bg-white p-3 rounded border border-gray-300'
+                className='flex justify-between items-center bg-silk-light p-3 rounded border border-walnut/20'
               >
                 <span className='text-gray-600'>Attempt {index + 1}</span>
                 <span
                   className={classNames(
                     "font-bold",
-                    result.time === stats.bestTime ? "text-green-700" : ""
+                    result.time === stats.bestTime ? "text-saffron" : ""
                   )}
                 >
                   {result.time}ms

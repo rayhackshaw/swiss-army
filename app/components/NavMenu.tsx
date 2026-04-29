@@ -31,7 +31,7 @@ export const NavMenu = () => {
   const pathname = usePathname();
 
   return (
-    <>
+    <div className='flex flex-wrap gap-y-2'>
       {menuItems.map((item) => {
         const isActive = pathname.includes(item.href);
         return (
@@ -40,14 +40,14 @@ export const NavMenu = () => {
             prefetch={false}
             key={item.href}
             className={classNames(
-              isActive ? "font-bold underline" : "",
-              "mr-4"
+              isActive ? "font-bold text-black underline underline-offset-4 decoration-saffron" : "hover:text-black",
+              "mr-4 transition-colors duration-100"
             )}
           >
             {item.title}
           </Link>
         );
       })}
-    </>
+    </div>
   );
 };

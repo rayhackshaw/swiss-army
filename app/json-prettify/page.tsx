@@ -72,7 +72,7 @@ export const JSONPrettify = () => {
           <select
             value={indentSize}
             onChange={(e) => setIndentSize(Number(e.target.value))}
-            className='bg-white px-2 py-1 rounded border border-gray-300'
+            className='bg-white px-2 py-1 rounded border border-walnut/20'
           >
             <option value={2}>2 spaces</option>
             <option value={4}>4 spaces</option>
@@ -81,39 +81,39 @@ export const JSONPrettify = () => {
         </div>
       </div>
 
-      <div className='flex space-x-2 mb-4'>
+      <div className='flex flex-wrap gap-2 mb-4'>
         <button
           onClick={prettifyJSON}
-          className='cursor-pointer px-4 py-2 rounded-md bg-gray-200 hover:bg-gray-300 transition-all duration-100 border border-gray-300'
+          className='cursor-pointer px-4 py-2 rounded-md bg-silk hover:bg-saffron hover:text-black transition-all duration-100 border border-walnut/20'
         >
           Prettify
         </button>
         <button
           onClick={minifyJSON}
-          className='cursor-pointer px-4 py-2 rounded-md bg-gray-200 hover:bg-gray-300 transition-all duration-100 border border-gray-300'
+          className='cursor-pointer px-4 py-2 rounded-md bg-silk hover:bg-saffron hover:text-black transition-all duration-100 border border-walnut/20'
         >
           Minify
         </button>
         {output && (
           <button
             onClick={copyToClipboard}
-            className='cursor-pointer px-4 py-2 rounded-md bg-gray-200 hover:bg-gray-300 transition-all duration-100 border border-gray-300'
+            className='cursor-pointer px-4 py-2 rounded-md bg-silk hover:bg-saffron hover:text-black transition-all duration-100 border border-walnut/20'
           >
             Copy Output
           </button>
         )}
         <button
           onClick={clearAll}
-          className='cursor-pointer px-4 py-2 rounded-md bg-gray-200 hover:bg-gray-300 transition-all duration-100 border border-gray-300'
+          className='cursor-pointer px-4 py-2 rounded-md bg-silk hover:bg-saffron hover:text-black transition-all duration-100 border border-walnut/20'
         >
           Clear
         </button>
       </div>
 
       {error && (
-        <div className='bg-red-50 border border-red-300 p-4 rounded-lg mb-4'>
-          <h3 className='text-red-800 font-bold mb-1'>Error</h3>
-          <p className='text-red-700 text-sm'>{error.message}</p>
+        <div className='bg-rust/10 border border-rust/30 p-4 rounded-lg mb-4'>
+          <h3 className='text-black font-bold mb-1'>Error</h3>
+          <p className='text-black/80 text-sm'>{error.message}</p>
         </div>
       )}
 
@@ -123,10 +123,10 @@ export const JSONPrettify = () => {
           <textarea
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            className='w-full bg-white p-4 border border-gray-300 rounded-sm h-[60vh] font-mono'
+            className='w-full bg-white p-4 border border-walnut/20 rounded-sm h-[40vh] md:h-[60vh] font-mono'
             placeholder='{"name": "example", "value": 123}'
           />
-          <div className='absolute bottom-2 left-2 text-gray-600 text-xs bg-gray-100 px-2 py-1 rounded'>
+          <div className='absolute bottom-2 left-2 text-black/60 text-xs bg-silk px-2 py-1 rounded'>
             {input.length} characters
           </div>
         </div>
@@ -137,12 +137,12 @@ export const JSONPrettify = () => {
             value={output}
             readOnly
             className={classNames(
-              "w-full bg-white p-4 border border-gray-300 rounded-sm h-[60vh] font-mono",
+              "w-full bg-white p-4 border border-walnut/20 rounded-sm h-[40vh] md:h-[60vh] font-mono",
               "resize-none"
             )}
             placeholder='Formatted JSON will appear here...'
           />
-          <div className='absolute bottom-2 left-2 text-gray-600 text-xs bg-gray-100 px-2 py-1 rounded'>
+          <div className='absolute bottom-2 left-2 text-black/60 text-xs bg-silk px-2 py-1 rounded'>
             {output.length} characters
           </div>
         </div>

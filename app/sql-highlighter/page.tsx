@@ -33,8 +33,8 @@ export const SQLSyntaxValidator = () => {
             className={classNames(
               "px-4 py-2 rounded-md font-semibold border",
               validation.isValid
-                ? "bg-green-50 text-green-700 border-green-300"
-                : "bg-red-50 text-red-700 border-red-300"
+                ? "bg-saffron/15 text-black border-saffron/40"
+                : "bg-rust/10 text-black border-rust/30"
             )}
           >
             {validation.isValid ? "✓ Valid SQL" : "✗ Invalid SQL"}
@@ -50,8 +50,8 @@ export const SQLSyntaxValidator = () => {
               className={classNames(
                 "p-4 rounded-lg border",
                 error.severity === "error"
-                  ? "bg-red-50 border-red-300"
-                  : "bg-yellow-50 border-yellow-300"
+                  ? "bg-rust/10 border-rust/30"
+                  : "bg-saffron/15 border-saffron/40"
               )}
             >
               <div className='flex items-start gap-2'>
@@ -59,8 +59,8 @@ export const SQLSyntaxValidator = () => {
                   className={classNames(
                     "font-bold text-xs uppercase px-2 py-1 rounded",
                     error.severity === "error"
-                      ? "bg-red-200 text-red-800"
-                      : "bg-yellow-200 text-yellow-800"
+                      ? "bg-rust/20 text-black"
+                      : "bg-saffron/30 text-black"
                   )}
                 >
                   {error.severity}
@@ -69,8 +69,8 @@ export const SQLSyntaxValidator = () => {
                   className={classNames(
                     "flex-1",
                     error.severity === "error"
-                      ? "text-red-700"
-                      : "text-yellow-700"
+                      ? "text-black"
+                      : "text-black"
                   )}
                 >
                   {error.message}
@@ -87,7 +87,7 @@ export const SQLSyntaxValidator = () => {
           <textarea
             value={sqlText}
             onChange={(e) => setSqlText(e.target.value)}
-            className='w-full bg-white p-4 border border-gray-300 rounded-sm h-[60vh] font-mono'
+            className='w-full bg-white p-4 border border-walnut/20 rounded-sm h-[40vh] md:h-[60vh] font-mono'
             placeholder='Enter your SQL query here...'
           />
         </div>
@@ -96,7 +96,7 @@ export const SQLSyntaxValidator = () => {
           <label className='block mb-2'>Syntax Highlighted:</label>
           <div
             className={classNames(
-              "w-full bg-white p-4 border border-gray-300 rounded-sm h-[60vh] font-mono overflow-auto",
+              "w-full bg-white p-4 border border-walnut/20 rounded-sm h-[40vh] md:h-[60vh] font-mono overflow-auto",
               "whitespace-pre-wrap"
             )}
             dangerouslySetInnerHTML={{ __html: getHighlightedSQL() }}

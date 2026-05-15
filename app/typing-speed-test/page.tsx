@@ -222,7 +222,7 @@ export const TypingSpeedTest = () => {
       <div className='flex py-4 items-center justify-between'>
         <button
           onClick={generateNewWords}
-          className='cursor-pointer px-4 py-2 rounded-md bg-silk hover:bg-saffron hover:text-black transition-all duration-100 border border-walnut/20'
+          className='cursor-pointer px-4 py-2 rounded-md bg-silk-light text-walnut font-medium border border-walnut/15 shadow-sm hover:bg-silk hover:border-walnut/30 active:translate-y-px transition-all duration-150'
         >
           Randomise
         </button>
@@ -235,10 +235,10 @@ export const TypingSpeedTest = () => {
               key={count}
               onClick={() => handleWordCountChange(count)}
               className={classNames(
-                "px-4 py-2 rounded-md transition-all duration-100 border cursor-pointer",
+                "px-4 py-2 rounded-md transition-all duration-150 border cursor-pointer shadow-sm active:translate-y-px font-medium",
                 wordCount === count
-                  ? "bg-saffron font-bold border-saffron text-black"
-                  : "bg-silk border-walnut/20 hover:bg-saffron/30"
+                  ? "bg-walnut text-silk-light border-walnut"
+                  : "bg-silk-light text-walnut border-walnut/15 hover:bg-silk hover:border-walnut/30"
               )}
             >
               {count}

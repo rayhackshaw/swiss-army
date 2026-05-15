@@ -15,7 +15,7 @@ export default function RootLayout({
   return (
     <html lang='en' className='stack-sans-text-regular'>
       <body className='py-6 px-20'>
-        <h1 className='mb-2 text-2xl'>Swiss Army Knife</h1>
+        <h1 className='mb-2 text-2xl' style={{ fontFamily: '"Fraunces", ui-serif, Georgia, serif' }}>Swiss Army Knife</h1>
         <NavMenu />
         <div className='mt-10 p-2'>{children}</div>
       </body>

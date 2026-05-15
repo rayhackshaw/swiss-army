@@ -134,7 +134,7 @@ export const ReactionSpeedTest = () => {
         {results.length > 0 && (
           <button
             onClick={reset}
-            className='cursor-pointer px-4 py-2 rounded-md bg-silk hover:bg-saffron hover:text-black transition-all duration-100 border border-walnut/20'
+            className='cursor-pointer px-4 py-2 rounded-md bg-silk-light text-walnut font-medium border border-walnut/15 shadow-sm hover:bg-silk hover:border-walnut/30 active:translate-y-px transition-all duration-150'
           >
             Reset
           </button>

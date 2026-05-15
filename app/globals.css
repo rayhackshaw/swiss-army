@@ -1,20 +1,22 @@
-@import url("https://fonts.googleapis.com/css2?family=Stack+Sans+Text:wght@200..700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Stack+Sans+Text:wght@200..700&family=Fraunces:opsz,wght@9..144,300..700&display=swap");
 @import "tailwindcss";
 
 @theme {
   --color-walnut: #582707;
-  --color-rust: #972D07;
+  --color-rust: #972d07;
   --color-violet: #372549;
-  --color-silk: #EACDC2;
-  --color-silk-light: #F5EBE6;
-  --color-saffron: #E3B505;
-  --color-saffron-light: #F5D94E;
+  --color-silk: #eacdc2;
+  --color-silk-light: #f5ebe6;
+  --color-saffron: #e3b505;
+  --color-saffron-light: #f5d94e;
 }
 
 body {
-  background-color: var(--color-silk-light);
-  color: #000000;
+  background-color: #fdfcf9;
+  color: #1a1a1a;
   font-family: "Stack Sans Text", sans-serif;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.05 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  background-repeat: repeat;
 }
 
 a {

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useRef } from "react";
 import classNames from "classnames";
 import {
   validateSQL,
@@ -8,9 +8,14 @@ import {
   highlightSQLWithTokens,
 } from "../utils/sql-validator";
 import type { SqlValidationResult } from "../types/sql-validator";
+import { useSyncedHeight } from "../hooks/useSyncedHeight";
 
 export const SQLSyntaxValidator = () => {
   const [sqlText, setSqlText] = useState("");
+
+  const inputRef = useRef<HTMLTextAreaElement>(null);
+  const previewRef = useRef<HTMLDivElement>(null);
+  useSyncedHeight(inputRef, previewRef);
 
   const validation = useMemo<SqlValidationResult>(() => {
     if (!sqlText.trim()) {
@@ -85,9 +90,10 @@ export const SQLSyntaxValidator = () => {
         <div className='relative flex-1'>
           <label className='block mb-2'>Input SQL:</label>
           <textarea
+            ref={inputRef}
             value={sqlText}
             onChange={(e) => setSqlText(e.target.value)}
-            className='w-full bg-white p-4 border border-walnut/20 rounded-sm h-[40vh] md:h-[60vh] font-mono'
+            className='w-full bg-white p-4 border border-walnut/20 rounded-sm h-[40vh] md:h-[60vh] font-mono tracking-tight'
             placeholder='Enter your SQL query here...'
           />
         </div>
@@ -95,8 +101,9 @@ export const SQLSyntaxValidator = () => {
         <div className='relative flex-1'>
           <label className='block mb-2'>Syntax Highlighted:</label>
           <div
+            ref={previewRef}
             className={classNames(
-              "w-full bg-white p-4 border border-walnut/20 rounded-sm h-[40vh] md:h-[60vh] font-mono overflow-auto",
+              "w-full bg-white p-4 border border-walnut/20 rounded-sm h-[40vh] md:h-[60vh] font-mono tracking-tight overflow-auto",
               "whitespace-pre-wrap"
             )}
             dangerouslySetInnerHTML={{ __html: getHighlightedSQL() }}

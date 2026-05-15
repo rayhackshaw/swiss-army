@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>body { margin: 0; }</style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+    <script>
+        const scene = new THREE.Scene();
+        const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+        const renderer = new THREE.WebGLRenderer();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+
+        const material = new THREE.ShaderMaterial({
+            uniforms: {
+                r: { value: new THREE.Vector2(window.innerWidth, window.innerHeight) },
+                time: { value: 0.0 },
+                rotation: { value: 0.0 }
+            },
+            fragmentShader: `
+                uniform vec2 r;
+                uniform float time;
+                uniform float rotation;
+
+                vec4 tanh_vec4(vec4 x) {
+                    vec4 e = exp(2.0 * x);
+                    return (e - 1.0) / (e + 1.0);
+                }
+
+                mat2 rotate2D(float angle) {
+                    float s = sin(angle);
+                    float c = cos(angle);
+                    return mat2(c, -s, s, c);
+                }
+
+                void main() {
+                    vec2 FC = gl_FragCoord.xy;
+                    vec2 p = (FC.xy*2.0-r)/r.y;
+
+                    // Apply rotation based on drag
+                    p = rotate2D(rotation) * p;
+
+                    // Add time-based animation
+                    p += vec2(sin(time * 0.5), cos(time * 0.3)) * 0.2;
+
+                    vec2 v = vec2(0.0);
+                    v += length(p) - 0.5;
+                    float d1 = 0.05 + max(v.x, -v.x/0.1);
+                    float d2 = 0.1 + abs(p.x - p.y);
+
+                    // Animate colors with time
+                    vec4 color = 0.03 * vec4(2.0 + sin(time), 1.0 + cos(time * 0.7), 1.0 + p.x, 1.0) / d1 / d2;
+                    gl_FragColor = tanh_vec4(color);
+                }
+            `
+        });
+
+        const geometry = new THREE.PlaneGeometry(2, 2);
+        const mesh = new THREE.Mesh(geometry, material);
+        scene.add(mesh);
+
+        // Click and drag rotation
+        let isDragging = false;
+        let previousMouseX = 0;
+        let currentRotation = 0;
+
+        window.addEventListener('mousedown', (event) => {
+            isDragging = true;
+            previousMouseX = event.clientX;
+        });
+
+        window.addEventListener('mouseup', () => {
+            isDragging = false;
+        });
+
+        window.addEventListener('mousemove', (event) => {
+            if (isDragging) {
+                const deltaX = event.clientX - previousMouseX;
+                currentRotation += deltaX * 0.01;
+                material.uniforms.rotation.value = currentRotation;
+                previousMouseX = event.clientX;
+            }
+        });
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            material.uniforms.r.value.set(window.innerWidth, window.innerHeight);
+        });
+
+        // Animation loop
+        function animate() {
+            requestAnimationFrame(animate);
+            material.uniforms.time.value += 0.01;
+            renderer.render(scene, camera);
+        }
+        animate();
+    </script>
+</body>
+</html>

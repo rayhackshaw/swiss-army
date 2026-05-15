@@ -1,14 +1,18 @@
 "use client";
 
-import { useState } from "react";
-import classNames from "classnames";
+import { useState, useRef } from "react";
 import type { JsonError } from "../types/json-prettify";
+import { useSyncedHeight } from "../hooks/useSyncedHeight";
 
 export const JSONPrettify = () => {
   const [input, setInput] = useState("");
   const [output, setOutput] = useState("");
   const [error, setError] = useState<JsonError | null>(null);
   const [indentSize, setIndentSize] = useState(2);
+
+  const inputRef = useRef<HTMLTextAreaElement>(null);
+  const outputRef = useRef<HTMLTextAreaElement>(null);
+  useSyncedHeight(inputRef, outputRef);
 
   const prettifyJSON = () => {
     if (!input.trim()) {
@@ -84,27 +88,27 @@ export const JSONPrettify = () => {
       <div className='flex flex-wrap gap-2 mb-4'>
         <button
           onClick={prettifyJSON}
-          className='cursor-pointer px-4 py-2 rounded-md bg-silk hover:bg-saffron hover:text-black transition-all duration-100 border border-walnut/20'
+          className='cursor-pointer px-4 py-2 rounded-md bg-silk-light text-walnut font-medium border border-walnut/15 shadow-sm hover:bg-silk hover:border-walnut/30 active:translate-y-px transition-all duration-150'
         >
           Prettify
         </button>
         <button
           onClick={minifyJSON}
-          className='cursor-pointer px-4 py-2 rounded-md bg-silk hover:bg-saffron hover:text-black transition-all duration-100 border border-walnut/20'
+          className='cursor-pointer px-4 py-2 rounded-md bg-silk-light text-walnut font-medium border border-walnut/15 shadow-sm hover:bg-silk hover:border-walnut/30 active:translate-y-px transition-all duration-150'
         >
           Minify
         </button>
         {output && (
           <button
             onClick={copyToClipboard}
-            className='cursor-pointer px-4 py-2 rounded-md bg-silk hover:bg-saffron hover:text-black transition-all duration-100 border border-walnut/20'
+            className='cursor-pointer px-4 py-2 rounded-md bg-silk-light text-walnut font-medium border border-walnut/15 shadow-sm hover:bg-silk hover:border-walnut/30 active:translate-y-px transition-all duration-150'
           >
             Copy Output
           </button>
         )}
         <button
           onClick={clearAll}
-          className='cursor-pointer px-4 py-2 rounded-md bg-silk hover:bg-saffron hover:text-black transition-all duration-100 border border-walnut/20'
+          className='cursor-pointer px-4 py-2 rounded-md bg-silk-light text-walnut font-medium border border-walnut/15 shadow-sm hover:bg-silk hover:border-walnut/30 active:translate-y-px transition-all duration-150'
         >
           Clear
         </button>
@@ -121,12 +125,13 @@ export const JSONPrettify = () => {
         <div className='relative flex-1'>
           <label className='block mb-2'>Input JSON:</label>
           <textarea
+            ref={inputRef}
             value={input}
             onChange={(e) => setInput(e.target.value)}
             className='w-full bg-white p-4 border border-walnut/20 rounded-sm h-[40vh] md:h-[60vh] font-mono'
             placeholder='{"name": "example", "value": 123}'
           />
-          <div className='absolute bottom-2 left-2 text-black/60 text-xs bg-silk px-2 py-1 rounded'>
+          <div className='absolute bottom-4 left-2 text-black/60 text-xs bg-silk px-2 py-1 rounded'>
             {input.length} characters
           </div>
         </div>
@@ -134,15 +139,13 @@ export const JSONPrettify = () => {
         <div className='relative flex-1'>
           <label className='block mb-2'>Output:</label>
           <textarea
+            ref={outputRef}
             value={output}
             readOnly
-            className={classNames(
-              "w-full bg-white p-4 border border-walnut/20 rounded-sm h-[40vh] md:h-[60vh] font-mono",
-              "resize-none"
-            )}
+            className='w-full bg-white p-4 border border-walnut/20 rounded-sm h-[40vh] md:h-[60vh] font-mono'
             placeholder='Formatted JSON will appear here...'
           />
-          <div className='absolute bottom-2 left-2 text-black/60 text-xs bg-silk px-2 py-1 rounded'>
+          <div className='absolute bottom-4 left-2 text-black/60 text-xs bg-silk px-2 py-1 rounded'>
             {output.length} characters
           </div>
         </div>

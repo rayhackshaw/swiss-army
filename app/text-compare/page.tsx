@@ -1,6 +1,8 @@
 "use client";
 
+import { useRef } from "react";
 import { useTextCompare } from "../hooks/useTextCompare";
+import { useSyncedHeight } from "../hooks/useSyncedHeight";
 import classNames from "classnames";
 
 export const TextComparePage = () => {
@@ -14,6 +16,10 @@ export const TextComparePage = () => {
     swap,
   } = useTextCompare();
 
+  const firstRef = useRef<HTMLTextAreaElement>(null);
+  const secondRef = useRef<HTMLTextAreaElement>(null);
+  useSyncedHeight(firstRef, secondRef);
+
   return (
     <div className='w-full'>
       <div className='flex py-4 justify-between'>
@@ -21,13 +27,13 @@ export const TextComparePage = () => {
         <div className='space-x-2 w-full'>
           <button
             onClick={compare}
-            className='cursor-pointer p-2 rounded-md bg-silk hover:bg-saffron hover:text-black transition-all duration-100 border border-walnut/20'
+            className='cursor-pointer px-4 py-2 rounded-md bg-silk-light text-walnut font-medium border border-walnut/15 shadow-sm hover:bg-silk hover:border-walnut/30 active:translate-y-px transition-all duration-150'
           >
             Compare
           </button>
           <button
             onClick={swap}
-            className='cursor-pointer p-2 rounded-md bg-silk hover:bg-saffron hover:text-black transition-all duration-100 border border-walnut/20'
+            className='cursor-pointer px-4 py-2 rounded-md bg-silk-light text-walnut font-medium border border-walnut/15 shadow-sm hover:bg-silk hover:border-walnut/30 active:translate-y-px transition-all duration-150'
           >
             Swap
           </button>
@@ -38,21 +44,23 @@ export const TextComparePage = () => {
       <div className='flex flex-col md:flex-row items-stretch gap-2 w-full'>
         <div className='relative flex-1 w-full'>
           <textarea
+            ref={firstRef}
             value={firstText}
             onChange={(e) => setFirstText(e.target.value)}
             className='w-full bg-white p-2 border border-walnut/20 rounded-sm h-[40vh] md:h-[60vh]'
           ></textarea>
-          <div className='absolute bottom-2 left-2 text-black/60 text-xs bg-silk px-2 py-1 rounded'>
+          <div className='absolute bottom-4 left-2 text-black/60 text-xs bg-silk px-2 py-1 rounded'>
             {firstText.length} characters
           </div>
         </div>
         <div className='relative flex-1 w-full'>
           <textarea
+            ref={secondRef}
             value={secondText}
             onChange={(e) => setSecondText(e.target.value)}
             className='w-full bg-white p-2 border border-walnut/20 rounded-sm h-[40vh] md:h-[60vh]'
           ></textarea>
-          <div className='absolute bottom-2 left-2 text-black/60 text-xs bg-silk px-2 py-1 rounded'>
+          <div className='absolute bottom-4 left-2 text-black/60 text-xs bg-silk px-2 py-1 rounded'>
             {secondText.length} characters
           </div>
         </div>
